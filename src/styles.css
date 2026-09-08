@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@source "./**/*.html";
+@theme {
+  --color-coal: #20221f;
+  --color-paper: #f4f0e7;
+  --color-copper: #9b4527;
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+}
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
+  body { margin: 0; }
+  :focus-visible { outline: 3px solid #9b4527; outline-offset: 6px; }
+  ::selection { background: #9b4527; color: #fff; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+}
+
+@layer base { nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px; font-weight: 700; } }

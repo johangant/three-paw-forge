@@ -1,0 +1,35 @@
+{
+  "copper-spoon": {
+    "width": 489,
+    "height": 720,
+    "widths": [
+      320,
+      489
+    ]
+  },
+  "door-handle": {
+    "width": 540,
+    "height": 720,
+    "widths": [
+      320,
+      540
+    ]
+  },
+  "horseshoe-tree": {
+    "width": 422,
+    "height": 720,
+    "widths": [
+      320,
+      422
+    ]
+  },
+  "scrollwork": {
+    "width": 960,
+    "height": 720,
+    "widths": [
+      320,
+      640,
+      960
+    ]
+  }
+}

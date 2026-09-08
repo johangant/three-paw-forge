@@ -1,0 +1,20 @@
+{
+  "name": "three-paw-forge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && node scripts/serve.mjs",
+    "preview": "node scripts/serve.mjs",
+    "audit": "lighthouse http://localhost:4173 --chrome-flags=\"--headless --no-sandbox\" --output=html --output=json --output-path=./lighthouse-report"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "lighthouse": "^13.4.1",
+    "tailwindcss": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  }
+}
