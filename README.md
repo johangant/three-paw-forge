@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Visit http://localhost:4173. After source edits, stop the server and run `npm run dev` again. `npm run build` compiles a minified stylesheet and copies the site to `dist/`. `npm run preview` serves an existing build.
+Visit http://localhost:4173. While `npm run dev` is running, edits in `src/` or `public/` rebuild the site and reload connected browser tabs automatically. `npm run build` compiles a minified stylesheet and copies the site to `dist/`. `npm run preview` serves an existing build without file watching or live reload.
 
 ## Personalise before publishing
 

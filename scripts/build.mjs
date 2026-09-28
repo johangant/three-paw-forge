@@ -1,7 +1,6 @@
 import { mkdir, rm, copyFile, cp, readdir } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
-await rm('dist', { recursive: true, force: true });
-await mkdir('dist', { recursive: true });
+
 async function copyPages(directory = 'src') {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const source = `${directory}/${entry.name}`;
@@ -13,6 +12,13 @@ async function copyPages(directory = 'src') {
     }
   }
 }
-await copyPages();
-await cp('public', 'dist', { recursive: true });
-execFileSync(process.execPath, ['node_modules/@tailwindcss/cli/dist/index.mjs', '-i', 'src/styles.css', '-o', 'dist/styles.css', '--minify'], { stdio: 'inherit' });
+
+export async function build() {
+  await rm('dist', { recursive: true, force: true });
+  await mkdir('dist', { recursive: true });
+  await copyPages();
+  await cp('public', 'dist', { recursive: true });
+  execFileSync(process.execPath, ['node_modules/@tailwindcss/cli/dist/index.mjs', '-i', 'src/styles.css', '-o', 'dist/styles.css', '--minify'], { stdio: 'inherit' });
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) await build();
