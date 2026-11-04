@@ -31,6 +31,15 @@
       566
     ]
   },
+  "patch-portrait": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      640,
+      1086
+    ]
+  },
   "scrollwork": {
     "width": 960,
     "height": 720,
