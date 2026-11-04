@@ -2,7 +2,7 @@
 
 A small static metalcraft portfolio built with Tailwind CSS. Node.js 22.19 or newer is required (Node.js 24 LTS recommended). No client-side JavaScript, remote fonts, tracking, or runtime framework.
 
-## Run locally
+## Run locally.
 
 ```sh
 npm install
