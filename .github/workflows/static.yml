@@ -31,7 +31,8 @@ jobs:
       - name: Build site
         run: npm run build
         env:
-          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          # Custom domains serve this site at /; only github.io uses the repository prefix.
+          BASE_PATH: ${{ endsWith(steps.pages.outputs.host, '.github.io') && steps.pages.outputs.base_path || '' }}
           GOOGLE_MAPS_STATIC_API_KEY: ${{ secrets.GOOGLE_MAPS_STATIC_API_KEY }}
       - name: Upload built site
         uses: actions/upload-pages-artifact@v3
