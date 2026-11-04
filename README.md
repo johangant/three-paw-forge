@@ -50,3 +50,11 @@ The contact page uses the owner-provided location `54.962963, -6.364953`. Its in
 The key appears in the rendered image URL: restrict it to Maps Static API and the HTTP referrers for your live domain and local development. Do not use an unrestricted server key. Google serves the image directly, including its attribution; no Google imagery is downloaded into the repository. Without a key, the map area shows a link to the precise Google Maps location.
 
 The previous OSM area-map source is retained under `assets/maps/` but is no longer displayed on the contact page.
+
+## GitHub Pages deployment
+
+In Settings → Pages, choose **GitHub Actions** as the publishing source. `.github/workflows/static.yml` installs locked dependencies with Node 24, runs the build, and publishes only `dist/`. It runs on pushes to `main` or manually from Actions. Build output and local `.env` files stay out of Git.
+
+The workflow uses the Pages configuration's base path, so the project URL `/three-paw-forge/` works for navigation, styles, favicons and responsive photographs. A custom domain at the root uses an empty base path. Local development continues at `/`; simulate the project build with `BASE_PATH=/three-paw-forge npm run build`.
+
+The Maps API key is optional: without the repository Actions secret `GOOGLE_MAPS_STATIC_API_KEY`, the contact page displays its interactive Google Maps link. Add that secret later and rerun the workflow to enable the static map. The browser-visible key must have website and Maps Static API restrictions. No local `.env` is uploaded.
