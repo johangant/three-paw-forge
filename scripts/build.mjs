@@ -1,5 +1,8 @@
-import { mkdir, rm, copyFile, cp, readdir } from 'node:fs/promises';
+import { mkdir, rm, cp, readdir, readFile, writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
+import { renderContactMap } from './contact-map.mjs';
+
+try { process.loadEnvFile('.env'); } catch (error) { if (error.code !== 'ENOENT') throw error; }
 
 async function copyPages(directory = 'src') {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
@@ -8,7 +11,8 @@ async function copyPages(directory = 'src') {
     else if (entry.name.endsWith('.html')) {
       const destination = source.replace(/^src\//, 'dist/');
       await mkdir(destination.slice(0, destination.lastIndexOf('/')), { recursive: true });
-      await copyFile(source, destination);
+      const html = await readFile(source, 'utf8');
+      await writeFile(destination, html.replace('<!--CONTACT_MAP-->', renderContactMap(process.env.GOOGLE_MAPS_STATIC_API_KEY)));
     }
   }
 }

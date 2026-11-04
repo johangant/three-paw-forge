@@ -42,3 +42,11 @@ After adding the four gallery photographs on 8 September 2026, Lighthouse 13.4.1
 ## Licence
 
 Website code and technical documentation are licensed under [MIT](LICENSE). Photographs, portfolio text and Three Paw Forge branding are reserved to Johan Gant; see [CONTENT-LICENSE.md](CONTENT-LICENSE.md).
+
+## Google location map
+
+The contact page uses the owner-provided location `54.962963, -6.364953`. Its interactive Google Maps link works without an API key. To show a static Google JPEG with a marker, enable Maps Static API and billing in Google Cloud, then set `GOOGLE_MAPS_STATIC_API_KEY` in an ignored local `.env` file or your hosting build environment. See `.env.example` and https://developers.google.com/maps/documentation/maps-static/get-api-key. Rebuild after changing the key.
+
+The key appears in the rendered image URL: restrict it to Maps Static API and the HTTP referrers for your live domain and local development. Do not use an unrestricted server key. Google serves the image directly, including its attribution; no Google imagery is downloaded into the repository. Without a key, the map area shows a link to the precise Google Maps location.
+
+The previous OSM area-map source is retained under `assets/maps/` but is no longer displayed on the contact page.
