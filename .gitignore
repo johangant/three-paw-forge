@@ -10,4 +10,3 @@ lighthouse-report.*
 __pycache__/
 *.pyc
 .idea
-.cache/

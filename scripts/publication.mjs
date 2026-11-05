@@ -1,50 +1,34 @@
-import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve, relative, sep } from 'node:path';
 import { normalizeBasePath } from './site-paths.mjs';
 
-const marker = '<!--PUBLICATION_DATES-->';
-const emptyHistory = () => ({ version: 1, pages: {} });
-const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-
-export function validDate(value) {
-  return typeof value === 'string' && datePattern.test(value)
-    && !Number.isNaN(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
+function git(args, cwd) {
+  return execFileSync('git', args, { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
 }
 
-export function validateHistory(history) {
-  if (history?.version !== 1 || !history.pages || typeof history.pages !== 'object' || Array.isArray(history.pages)) {
-    throw new Error('Invalid publication history; refusing to reset publication dates.');
+export function gitDates(source, dependencies, cwd = process.cwd()) {
+  if (git(['rev-parse', '--is-shallow-repository'], cwd) === 'true') {
+    throw new Error('Footer dates require full Git history. Use fetch-depth: 0 in checkout.');
   }
-  for (const [url, record] of Object.entries(history.pages)) {
-    if (!url.startsWith('/') || !url.endsWith('/') || !record || typeof record !== 'object') throw new Error('Invalid publication page record.');
-    for (const key of ['firstPublished', 'lastUpdated']) {
-      if (record[key] != null && !validDate(record[key])) throw new Error(`Invalid ${key} for ${url}.`);
-    }
-    if (record.firstPublished && record.lastUpdated && record.firstPublished > record.lastUpdated) throw new Error(`Publication dates out of order for ${url}.`);
-    if (record.hash != null && !/^[a-f0-9]{64}$/.test(record.hash)) throw new Error(`Invalid content hash for ${url}.`);
-  }
-  return history;
-}
-
-export function publicationRecord(previous, seed, hash, releaseDate) {
-  const firstPublished = previous?.firstPublished ?? seed?.firstPublished ?? null;
-  if (!releaseDate) return { hash, firstPublished, lastUpdated: previous?.lastUpdated ?? seed?.lastUpdated ?? null };
-  if (!validDate(releaseDate)) throw new Error('PUBLICATION_DATE must be a valid YYYY-MM-DD date.');
-  if ([firstPublished, previous?.lastUpdated, seed?.lastUpdated].some(date => date && date > releaseDate)) {
-    throw new Error('Release date precedes recorded publication history.');
-  }
-  if (previous?.hash === hash) return { ...previous, firstPublished };
-  return {
-    hash,
-    firstPublished: previous || seed ? firstPublished : releaseDate,
-    lastUpdated: releaseDate,
-  };
+  const history = git(['log', '--follow', '--format=%cI', '--', source], cwd).split('\n').filter(Boolean);
+  if (!history.length) return { firstPublished: null, lastUpdated: null };
+  // The Eleventy conversion rewrote some pages too heavily for Git's rename
+  // detection. Include the former HTML source for the same route when it exists.
+  const legacy = source.replace(/\.(?:njk|md)$/, '.html');
+  const legacyHistory = legacy !== source ? git(['log', '--follow', '--format=%cI', '--', legacy], cwd).split('\n').filter(Boolean) : [];
+  const first = [...history, ...legacyHistory].sort((a, b) => Date.parse(a) - Date.parse(b))[0];
+  const latest = git(['log', '-1', '--format=%cI', '--', ...new Set([source, ...dependencies])], cwd);
+  return { firstPublished: new Date(first).toISOString(), lastUpdated: new Date(latest || history[0]).toISOString() };
 }
 
 export function renderDates(record) {
-  const label = value => new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Europe/London' }).format(new Date(`${value}T12:00:00Z`));
-  const time = value => value ? `<time datetime="${value}">${label(value)}</time>` : 'not recorded';
+  const time = value => {
+    if (!value) return 'not yet committed';
+    const date = new Date(value);
+    const label = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Europe/London' }).format(date);
+    return `<time datetime="${date.toISOString()}">${label}</time>`;
+  };
   return `First published: ${time(record.firstPublished)} <span aria-hidden="true">·</span> Last updated: ${time(record.lastUpdated)}`;
 }
 
@@ -58,92 +42,55 @@ async function htmlFiles(directory) {
   return result.sort();
 }
 
-// Hash rendered HTML plus locally referenced assets; dates themselves never enter the hash.
-export async function pageHash(html, directory, basePath = '') {
-  const root = resolve(directory);
-  const urls = new Set();
+export async function pageDependencies(source, html, cwd = process.cwd(), basePath = '') {
+  const dependencies = new Set(['src/styles.css', 'eleventy.config.js', 'scripts/build.mjs', 'scripts/publication.mjs', 'scripts/site-paths.mjs', 'package.json', 'package-lock.json']);
+  const visited = new Set();
+  async function template(path) {
+    if (visited.has(path)) return;
+    visited.add(path);
+    dependencies.add(path);
+    const text = await readFile(resolve(cwd, path), 'utf8');
+    for (const match of text.matchAll(/{%\s*(?:include|extends)\s+["']([^"']+)["']/g)) {
+      await template(`src/_includes/${match[1]}`);
+    }
+    const layout = text.match(/^layout:\s*["']?([^\s"']+)/m);
+    if (layout) await template(`src/_includes/${layout[1]}`);
+    if (/\bsite\./.test(text)) dependencies.add('src/_data/site.json');
+    if (/\bfaq\b/.test(text)) dependencies.add('src/_data/faq.json');
+    if (/\bfaqMarkdown\b/.test(text)) dependencies.add('scripts/faq-markdown.mjs');
+    if (/\bcontactMap\b/.test(text)) dependencies.add('scripts/contact-map.mjs');
+    if (/\bcollections\.(?:pieces|featuredPieces)\b/.test(text)) {
+      dependencies.add('src/pieces'); // A directory pathspec includes additions and deletions too.
+    }
+  }
+  await template(source);
   for (const match of html.matchAll(/\b(?:src|href|srcset)="([^"]*)"/g)) {
     for (const candidate of match[1].split(',')) {
       const url = candidate.trim().split(/\s+/)[0];
       if (!url?.startsWith('/') || url.startsWith('//')) continue;
       const pathname = new URL(url, 'https://local.invalid').pathname;
       const local = basePath && pathname.startsWith(`${basePath}/`) ? pathname.slice(basePath.length) : pathname;
-      if (/\.(?:css|js|jpg|jpeg|png|webp|svg|avif|woff2?)$/i.test(local)) urls.add(decodeURIComponent(local));
+      if (/\.(?:css|js|jpg|jpeg|png|webp|svg|avif|woff2?)$/i.test(local) && local !== '/styles.css') {
+        const path = resolve(cwd, 'public', `.${decodeURIComponent(local)}`);
+        if (!path.startsWith(resolve(cwd, 'public') + sep)) throw new Error('Asset path escapes public directory.');
+        dependencies.add(relative(cwd, path).split(sep).join('/'));
+      }
     }
   }
-  const hash = createHash('sha256').update(html);
-  for (const url of [...urls].sort()) {
-    const path = resolve(root, `.${url}`);
-    if (!path.startsWith(root + sep)) throw new Error('Asset path escapes build directory.');
-    hash.update(url).update(await readFile(path));
-  }
-  return hash.digest('hex');
-}
-
-async function readLocalHistory(path) {
-  try { return validateHistory(JSON.parse(await readFile(path, 'utf8'))); }
-  catch (error) { if (error.code === 'ENOENT') return emptyHistory(); throw error; }
-}
-
-// configure-pages can report an HTTP base URL for a custom domain. Always read
-// its publication registry over HTTPS, preserving the hostname and project path.
-export function normalizePublicationUrl(value) {
-  const url = new URL(value);
-  if (url.protocol === 'http:') url.protocol = 'https:';
-  if (url.protocol !== 'https:') throw new Error('Publication URL must use HTTP or HTTPS.');
-  if (url.username || url.password) throw new Error('Publication URL must not contain credentials.');
-  url.search = '';
-  url.hash = '';
-  return url.href.replace(/\/$/, '');
-}
-
-async function publishedHistory(baseUrl) {
-  const response = await fetch(`${baseUrl}/publication.json?release=${Date.now()}`, { cache: 'no-store', signal: AbortSignal.timeout(20000) });
-  if (response.status === 404) {
-    console.warn('No published date registry found. Existing dates will remain unknown unless seeded.');
-    return null;
-  }
-  if (!response.ok) throw new Error(`Cannot read published date registry (${response.status}); refusing to reset dates.`);
-  return validateHistory(await response.json());
+  return [...dependencies];
 }
 
 export async function annotatePublication(directory = 'dist') {
-  const publishing = process.env.PUBLICATION_MODE === 'publish';
   const basePath = normalizeBasePath(process.env.BASE_PATH);
-  const seed = await readLocalHistory('assets/publication-history.json');
-  let history = await readLocalHistory('.cache/publication.json');
-  let baseUrl;
-  if (publishing) {
-    if (!process.env.PUBLICATION_BASE_URL) throw new Error('Publishing requires PUBLICATION_BASE_URL.');
-    baseUrl = normalizePublicationUrl(process.env.PUBLICATION_BASE_URL);
-    history = await publishedHistory(baseUrl);
-  }
-  const releaseDate = publishing ? (process.env.PUBLICATION_DATE || new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London' }).format(new Date())) : null;
-  if (releaseDate && !validDate(releaseDate)) throw new Error('Invalid release date.');
-  const result = { version: 1, pages: { ...history?.pages } };
   for (const path of await htmlFiles(directory)) {
     const html = await readFile(path, 'utf8');
-    if (!html.includes(marker)) throw new Error(`Missing publication marker in ${path}.`);
-    const output = relative(resolve(directory), path).split(sep).join('/');
-    const url = '/' + output.replace(/index\.html$/, '');
-    let legacy = seed.pages[url];
-    // During adoption (or if the registry disappears), never call an existing page newly published.
-    if (publishing && !history && !legacy) {
-      const response = await fetch(`${baseUrl}${url}`, { method: 'HEAD', cache: 'no-store', signal: AbortSignal.timeout(20000) });
-      if (response.ok) legacy = { firstPublished: null, lastUpdated: null };
-      else if (response.status !== 404) throw new Error(`Cannot establish publication history for ${url} (${response.status}).`);
-    }
-    const hash = await pageHash(html, directory, basePath);
-    const record = publicationRecord(history?.pages[url], legacy, hash, releaseDate);
-    if (publishing) {
-      const previous = history?.pages[url];
-      const status = previous?.hash === hash ? 'Unchanged' : (previous || legacy ? 'Updated' : 'Added');
-      console.log(`[publication] ${status} ${url} — first published: ${record.firstPublished ?? 'not recorded'}, last updated: ${record.lastUpdated ?? 'not recorded'}`);
-    }
-    result.pages[url] = record;
-    await writeFile(path, html.replace(marker, renderDates(record)));
+    const marker = html.match(/<!--PUBLICATION_DATES:([^>]+)-->/);
+    if (!marker) throw new Error(`Missing publication source marker in ${path}.`);
+    const source = decodeURIComponent(marker[1]).replace(/^\.\//, '');
+    if (!source.startsWith('src/') || source.split('/').includes('..')) throw new Error('Invalid publication source path.');
+    const dependencies = await pageDependencies(source, html, process.cwd(), basePath);
+    const dates = gitDates(source, dependencies);
+    await writeFile(path, html.replace(marker[0], renderDates(dates)));
+    console.log(`[dates] ${source}: first ${dates.firstPublished ?? 'uncommitted'}, updated ${dates.lastUpdated ?? 'uncommitted'}`);
   }
-  // This registry travels in the same Pages artifact as the dated HTML. Failed deployments
-  // do not replace the live registry, and local builds never advance its dates.
-  await writeFile(resolve(directory, 'publication.json'), JSON.stringify(result, null, 2) + '\n');
 }

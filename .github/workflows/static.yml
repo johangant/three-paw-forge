@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -28,13 +30,11 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install dependencies
         run: npm ci
-      - name: Test publication tracking
+      - name: Test build helpers
         run: npm test
       - name: Build site
         run: npm run build
         env:
-          PUBLICATION_MODE: publish
-          PUBLICATION_BASE_URL: ${{ steps.pages.outputs.base_url }}
           # Custom domains serve this site at /; only github.io uses the repository prefix.
           BASE_PATH: ${{ endsWith(steps.pages.outputs.host, '.github.io') && steps.pages.outputs.base_path || '' }}
           GOOGLE_MAPS_STATIC_API_KEY: ${{ secrets.GOOGLE_MAPS_STATIC_API_KEY }}

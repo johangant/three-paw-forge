@@ -12,9 +12,9 @@ export default function (eleventyConfig) {
     .filter(piece => piece.data.featured)
     .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)));
   eleventyConfig.addTransform('basePath', function (content) {
-    return typeof this.page.outputPath === 'string' && this.page.outputPath.endsWith('.html')
-      ? applyBasePath(content, normalizeBasePath(process.env.BASE_PATH))
-      : content;
+    if (typeof this.page.outputPath !== 'string' || !this.page.outputPath.endsWith('.html')) return content;
+    const marked = content.replace('<!--PUBLICATION_DATES-->', `<!--PUBLICATION_DATES:${encodeURIComponent(this.page.inputPath)}-->`);
+    return applyBasePath(marked, normalizeBasePath(process.env.BASE_PATH));
   });
   return {
     dir: { input: 'src', output: 'dist', includes: '_includes', data: '_data' },
