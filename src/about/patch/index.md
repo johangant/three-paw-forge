@@ -47,35 +47,35 @@ gallery:
     width: 1600
     height: 2133
     alt: "Patch lying on her side on the grass and looking towards the camera"
-    caption: "A pause on the lawn."
+    caption: "Big Floppa."
   - src: "/images/IMG_8698-1600.jpg"
     srcset: "/images/IMG_8698-320.jpg 320w, /images/IMG_8698-640.jpg 640w, /images/IMG_8698-1280.jpg 1280w, /images/IMG_8698-1600.jpg 1600w"
     webpSrcset: "/images/IMG_8698-320.webp 320w, /images/IMG_8698-640.webp 640w, /images/IMG_8698-1280.webp 1280w, /images/IMG_8698-1600.webp 1600w"
     width: 1600
     height: 1527
     alt: "Patch leaning over the top of a stone wall against a blue sky"
-    caption: "A different point of view."
+    caption: "Happy kitty."
   - src: "/images/IMG_0426-1600.jpg"
     srcset: "/images/IMG_0426-320.jpg 320w, /images/IMG_0426-640.jpg 640w, /images/IMG_0426-1280.jpg 1280w, /images/IMG_0426-1600.jpg 1600w"
     webpSrcset: "/images/IMG_0426-320.webp 320w, /images/IMG_0426-640.webp 640w, /images/IMG_0426-1280.webp 1280w, /images/IMG_0426-1600.webp 1600w"
     width: 1600
     height: 2133
     alt: "Patch curled up inside an open cardboard box"
-    caption: "A box will do nicely."
+    caption: "A box makes for the best bed."
   - src: "/images/IMG_1483-1600.jpg"
     srcset: "/images/IMG_1483-320.jpg 320w, /images/IMG_1483-640.jpg 640w, /images/IMG_1483-1280.jpg 1280w, /images/IMG_1483-1600.jpg 1600w"
     webpSrcset: "/images/IMG_1483-320.webp 320w, /images/IMG_1483-640.webp 640w, /images/IMG_1483-1280.webp 1280w, /images/IMG_1483-1600.webp 1600w"
     width: 1600
     height: 2133
     alt: "Patch sitting behind a yellow play tray containing colourful toys"
-    caption: "Checking the arrangements."
+    caption: "If I fits, I sits!"
   - src: "/images/IMG_20200808_203813-1600.jpg"
     srcset: "/images/IMG_20200808_203813-320.jpg 320w, /images/IMG_20200808_203813-640.jpg 640w, /images/IMG_20200808_203813-1280.jpg 1280w, /images/IMG_20200808_203813-1600.jpg 1600w"
     webpSrcset: "/images/IMG_20200808_203813-320.webp 320w, /images/IMG_20200808_203813-640.webp 640w, /images/IMG_20200808_203813-1280.webp 1280w, /images/IMG_20200808_203813-1600.webp 1600w"
     width: 1600
     height: 1200
     alt: "Patch standing on a red chair beside a wooden garden table"
-    caption: "A seat at the table."
+    caption: "Young Patch looking for scraps to eat after a summer BBQ."
   - src: "/images/IMG_20200826_181912-1600.jpg"
     srcset: "/images/IMG_20200826_181912-320.jpg 320w, /images/IMG_20200826_181912-640.jpg 640w, /images/IMG_20200826_181912-1280.jpg 1280w, /images/IMG_20200826_181912-1600.jpg 1600w"
     webpSrcset: "/images/IMG_20200826_181912-320.webp 320w, /images/IMG_20200826_181912-640.webp 640w, /images/IMG_20200826_181912-1280.webp 1280w, /images/IMG_20200826_181912-1600.webp 1600w"
@@ -89,7 +89,7 @@ gallery:
     width: 1600
     height: 2133
     alt: "Patch sitting in fresh snow beside a garden building"
-    caption: "A black cat in a white garden."
+    caption: "Not looking overly impressed at all this snow."
   - src: "/images/IMG_7452-1600.jpg"
     srcset: "/images/IMG_7452-320.jpg 320w, /images/IMG_7452-640.jpg 640w, /images/IMG_7452-1280.jpg 1280w, /images/IMG_7452-1600.jpg 1600w"
     webpSrcset: "/images/IMG_7452-320.webp 320w, /images/IMG_7452-640.webp 640w, /images/IMG_7452-1280.webp 1280w, /images/IMG_7452-1600.webp 1600w"
@@ -103,21 +103,21 @@ gallery:
     width: 1600
     height: 2133
     alt: "Patch resting with her eyes closed beside someone sitting outdoors"
-    caption: "A quiet moment in company."
+    caption: "A quiet moment in my company."
   - src: "/images/PXL_20201225_120244174._exported_198_1608918446557-1024.jpg"
     srcset: "/images/PXL_20201225_120244174._exported_198_1608918446557-320.jpg 320w, /images/PXL_20201225_120244174._exported_198_1608918446557-640.jpg 640w, /images/PXL_20201225_120244174._exported_198_1608918446557-1024.jpg 1024w"
     webpSrcset: "/images/PXL_20201225_120244174._exported_198_1608918446557-320.webp 320w, /images/PXL_20201225_120244174._exported_198_1608918446557-640.webp 640w, /images/PXL_20201225_120244174._exported_198_1608918446557-1024.webp 1024w"
     width: 1024
     height: 768
     alt: "Close-up of Patch looking at the camera with her mouth open and white chest patch visible"
-    caption: "Something to say."
+    caption: "Something to say?"
   - src: "/images/PXL_20210505_135237003.MP-1600.jpg"
     srcset: "/images/PXL_20210505_135237003.MP-320.jpg 320w, /images/PXL_20210505_135237003.MP-640.jpg 640w, /images/PXL_20210505_135237003.MP-1280.jpg 1280w, /images/PXL_20210505_135237003.MP-1600.jpg 1600w"
     webpSrcset: "/images/PXL_20210505_135237003.MP-320.webp 320w, /images/PXL_20210505_135237003.MP-640.webp 640w, /images/PXL_20210505_135237003.MP-1280.webp 1280w, /images/PXL_20210505_135237003.MP-1600.webp 1600w"
     width: 1600
     height: 1200
     alt: "Patch standing beside a blue food bowl near a wooden doorway"
-    caption: "A stop by the food bowl."
+    caption: "Post-op recovery snack."
 ---
 Patch came to live in our shed around the winter of 2020. She swapped shelter for mouse deterrence skills and has been a constant presence around the house and garden ever since.
 
