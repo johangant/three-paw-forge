@@ -7,8 +7,9 @@ export function renderContactMap(apiKey = '') {
   }
   const params = new URLSearchParams({
     center: coordinates,
-    zoom: '16',
-    size: '640x400',
+    // Regional view: Northern Ireland and the surrounding coast, rather than streets.
+    zoom: '7',
+    size: '640x320',
     scale: '2',
     maptype: 'roadmap',
     format: 'jpg',
@@ -16,5 +17,5 @@ export function renderContactMap(apiKey = '') {
     key: apiKey.trim(),
   });
   const imageUrl = `https://maps.googleapis.com/maps/api/staticmap?${params}`.replaceAll('&', '&amp;');
-  return `<a href="${interactiveMapUrl}" aria-label="Open the Three Paw Forge location in Google Maps"><img src="${imageUrl}" width="640" height="400" alt="Google map marking Three Paw Forge at 206 Dunminning Road, Glarryford" loading="lazy" decoding="async" class="block h-auto w-full border border-coal/20"></a>`;
+  return `<a href="${interactiveMapUrl}" aria-label="Open the Three Paw Forge location in Google Maps"><img src="${imageUrl}" width="640" height="320" alt="Regional map showing Three Paw Forge in Northern Ireland and the surrounding coast" loading="lazy" decoding="async" class="block h-auto w-full border border-coal/20"></a>`;
 }

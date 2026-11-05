@@ -1,21 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Meet Johan, the maker behind Three Paw Forge, and learn about his metal crafting.">
-<meta name="theme-color" content="#20221f">
-<title>About — Three Paw Forge</title>
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/styles.css">
-</head>
-<body class="flex min-h-screen flex-col bg-paper text-coal font-sans antialiased">
-<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-paper focus:p-4">Skip to content</a>
-<header class="mx-auto flex w-full max-w-7xl flex-col items-start justify-between gap-5 px-6 py-6 sm:flex-row sm:items-center sm:gap-8 md:px-12 md:py-8">
-<a href="/" aria-label="Three Paw Forge home" class="inline-block max-w-full shrink-0"><img src="/three-paw-forge-logo.svg" alt="Three Paw Forge" width="605.15" height="107.35" class="block h-auto w-72 max-w-full lg:w-80"></a>
-<nav aria-label="Main navigation" class="flex w-full items-center justify-between gap-6 text-sm sm:w-auto sm:justify-end md:gap-8"><a class="py-2" href="/work/">The work</a><a class="py-2" href="/about/" aria-current="page">About</a><a class="py-2" href="/contact/">Contact</a></nav>
-</header>
-<main id="main" class="flex-1">
+---
+layout: "layouts/base.njk"
+title: "About — Three Paw Forge"
+description: "Meet Johan, the maker behind Three Paw Forge, and learn about his metal crafting."
+permalink: "/about/"
+---
 <section id="about" class="bg-coal py-16 text-paper md:py-24" aria-labelledby="about-title"><div class="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-2 md:px-12"><div class="md:col-span-2"><p class="mb-4 text-xs font-bold uppercase tracking-widest text-[#e2aa85]">About the maker</p><h1 id="about-title" class="font-serif text-4xl leading-tight md:text-5xl">Hello, I’m Johan.</h1></div>
 <img src="/images/johan-gant-566.jpg" srcset="/images/johan-gant-320.jpg 320w, /images/johan-gant-566.jpg 566w" sizes="(min-width: 768px) 320px, (min-width: 368px) 320px, calc(100vw - 48px)" width="566" height="529" alt="Johan Gant" fetchpriority="high" class="block h-auto w-full max-w-80">
 <div class="max-w-lg space-y-5 text-lg leading-relaxed">
@@ -26,8 +14,9 @@
 <div>
     <h2 id="approach-title" class="font-serif text-3xl">What's with the name?</h2>
     <p class="text-lg">
-    Three Paw Forge takes its name from our resident farm cat - Patch - who came to live in our shed around the winter of 2020. Swapping shelter for mouse deterrence skills, she's grown to become a kind of constant within the house grounds. With a kind but strongly independent nature she can be found patrolling the surrounding area or snoozing in the sun. Sadly, an accident with a car in her younger years meant she had to lose a leg to save her life. She now lives her best life passing silent judgement from a distance while I work in the workshop or flopping on her side to invite a brush from whoever is willing to oblige.
+    Three Paw Forge takes its name from our resident farm cat, Patch, who came to live in our shed around the winter of 2020. Independent, fond of a sunny spot, and usually somewhere nearby while I work, she’s the three-pawed character behind the name.
     </p>
+    <p class="mt-5"><a href="/about/patch/" class="inline-block py-2 font-bold">Meet Patch — her story and photographs →</a></p>
     <p class="mt-8 text-lg">
         Three Paw Forge is not a big operation. I created it out of one half of my home garage using materials from a kitchen refit that I turned into a workbench, anvil table and shelves making a small but functional workshop space.
     </p>
@@ -47,9 +36,3 @@
     Possibly the question I get the most but sadly has no simple answer! I would describe myself as having a Nordic background having roots or lived in Denmark, Norway and Finland as well as the UK. I live and work in Northern Ireland right now with my young family.
         </p>
 </section>
-</main>
-<footer class="mx-auto flex max-w-7xl flex-wrap justify-between gap-4 border-t border-coal/20 px-6 py-8 text-xs md:px-12"><p>© Three Paw Forge</p>
-    <!-- <a href="#" class="py-2">Back to top ↑</a> -->
-</footer>
-</body>
-</html>

@@ -10,6 +10,7 @@
     "audit": "lighthouse http://localhost:4173 --chrome-flags=\"--headless --no-sandbox\" --output=html --output=json --output-path=./lighthouse-report"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^3.1.8",
     "@tailwindcss/cli": "^4.1.0",
     "lighthouse": "^13.4.1",
     "tailwindcss": "^4.1.0"

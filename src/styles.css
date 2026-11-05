@@ -1,5 +1,6 @@
 @import "tailwindcss";
-@source "./**/*.html";
+@source "./**/*.njk";
+@source "./**/*.md";
 @theme {
   --color-coal: #20221f;
   --color-paper: #f4f0e7;
@@ -21,3 +22,26 @@
 }
 
 @layer base { nav a[aria-current="page"] { font-weight: 700; } }
+
+/* Only Patch's gallery loads the small script that opens this native dialog. */
+.gallery-lightbox {
+  margin: auto;
+  width: min(70rem, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+  border: 1px solid #f4f0e7;
+  padding: 1.25rem;
+  background: #20221f;
+  color: #f4f0e7;
+}
+.gallery-lightbox::backdrop { background: rgb(0 0 0 / 85%); }
+.lightbox-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.gallery-lightbox button { min-height: 2.75rem; padding: 0.5rem 0.75rem; border: 1px solid currentColor; cursor: pointer; }
+.gallery-lightbox button:hover { background: #f4f0e7; color: #20221f; }
+.lightbox-toolbar a { padding: 0.5rem; }
+.lightbox-image { display: block; width: 100%; height: min(60dvh, calc(100dvh - 18rem), 50rem); object-fit: contain; margin-block: 1rem; }
+.lightbox-caption { margin-block: 1rem; line-height: 1.6; }
+.gallery-lightbox :focus-visible { outline-color: #e2aa85; }
+
+.lightbox-navigation { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0.5rem; font-size: 0.875rem; }
+.lightbox-navigation a { padding: 0.5rem; text-align: center; }

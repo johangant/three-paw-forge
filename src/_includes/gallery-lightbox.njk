@@ -1,0 +1,17 @@
+<dialog id="gallery-lightbox" class="gallery-lightbox" aria-labelledby="lightbox-title" aria-describedby="lightbox-caption" closedby="any">
+<div class="lightbox-toolbar">
+<h2 id="lightbox-title" class="font-serif text-2xl">Patch’s gallery</h2>
+<button type="button" data-close autofocus>Close <span aria-hidden="true">×</span></button>
+</div>
+<figure>
+<img alt="" class="lightbox-image" decoding="async">
+<figcaption id="lightbox-caption" class="lightbox-caption" aria-live="polite" aria-atomic="true"><span data-counter></span><span data-caption></span></figcaption>
+</figure>
+<div class="lightbox-navigation">
+<button type="button" data-previous aria-label="Previous photograph">← Previous</button>
+<a href="#" data-original>Open image</a>
+<button type="button" data-next aria-label="Next photograph">Next →</button>
+</div>
+<p class="mt-4 text-sm">Use the left and right arrow keys to browse. Press Escape to close.</p>
+</dialog>
+<script src="/gallery-lightbox.js" defer></script>

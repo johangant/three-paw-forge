@@ -1,0 +1,20 @@
+---
+layout: "layouts/base.njk"
+title: "Contact — Three Paw Forge"
+description: "Get in touch with Johan at Three Paw Forge. Public contact details are coming soon."
+permalink: "/contact/"
+---
+<section id="contact" class="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-28" aria-labelledby="contact-title"><p class="mb-4 text-xs font-bold uppercase tracking-widest text-copper">Contact</p><h1 id="contact-title" class="font-serif text-4xl md:text-6xl">Let’s talk metal.</h1><p class="mt-6 max-w-xl text-lg leading-relaxed">Curious about a piece or want to say hello? This is where you’ll be able to reach me.</p>
+<p class="mt-6 text-lg"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+</section>
+<section class="mx-auto max-w-7xl px-6 pb-16 md:px-12" aria-labelledby="enquiry-title"><h2 id="enquiry-title" class="font-serif text-3xl">Asking about a piece</h2><p class="mt-5 max-w-2xl text-lg leading-relaxed">If something in the collection catches your eye, include its name when you get in touch: Copper spoon, Twisted door handle, or Horseshoe Christmas tree. That makes it easy to know which piece you mean.</p><a href="/work/" class="mt-6 inline-block py-2 font-bold">Browse the work →</a></section>
+<section class="mx-auto w-full max-w-7xl px-6 pb-16 md:px-12" aria-labelledby="location-title">
+<div class="grid gap-8 md:grid-cols-3 md:items-start">
+<div><h2 id="location-title" class="font-serif text-3xl">Location</h2>
+<address class="mt-5 text-lg not-italic leading-relaxed">206 Dunminning Road<br>Glarryford<br>Northern Ireland</address>
+<p class="mt-6"><a href="https://www.google.com/maps/search/?api=1&amp;query=54.962963,-6.364953">Open location in Google Maps →</a></p></div>
+<figure class="min-w-0 md:col-span-2">
+{% contactMap %}
+<figcaption class="mt-3 text-sm leading-relaxed"><a href="https://www.google.com/maps/search/?api=1&amp;query=54.962963,-6.364953"></a>.</figcaption>
+</figure></div>
+</section>

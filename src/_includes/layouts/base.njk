@@ -1,0 +1,10 @@
+{% include "head.njk" %}
+<body class="flex min-h-screen flex-col bg-paper text-coal font-sans antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-paper focus:p-4">Skip to content</a>
+{% include "header.njk" %}
+<main id="main" class="flex-1">
+{{ content | safe }}
+</main>
+{% include "footer.njk" %}
+</body>
+</html>
