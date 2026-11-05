@@ -12,9 +12,3 @@ It does not apply to:
 These materials may not be reused or redistributed without permission from
 Johan Gant, except as permitted by applicable law. No trademark rights are
 granted by the code licence. Third-party dependencies retain their own licences.
-
-The map data in `assets/maps/contact-area.json` and the map image
-`public/images/contact-area-map.jpg` use OpenStreetMap data, © OpenStreetMap
-contributors, under the Open Database Licence. They are excluded from the
-owner-reserved photography terms above. See https://www.openstreetmap.org/copyright
-and `assets/SOURCES.md` for source and attribution details.
