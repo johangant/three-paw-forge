@@ -11,6 +11,10 @@
       "url": "/about/"
     },
     {
+      "label": "FAQ",
+      "url": "/faq/"
+    },
+    {
       "label": "Contact",
       "url": "/contact/"
     }

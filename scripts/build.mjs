@@ -1,5 +1,6 @@
 import { mkdir, rm, cp, writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
+import { annotatePublication } from './publication.mjs';
 
 try { process.loadEnvFile('.env'); } catch (error) { if (error.code !== 'ENOENT') throw error; }
 
@@ -12,6 +13,7 @@ export async function build() {
   await cp('public', 'dist', { recursive: true });
   await writeFile('dist/.nojekyll', '');
   execFileSync(process.execPath, ['node_modules/@tailwindcss/cli/dist/index.mjs', '-i', 'src/styles.css', '-o', 'dist/styles.css', '--minify'], { stdio: 'inherit' });
+  await annotatePublication();
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) await build();

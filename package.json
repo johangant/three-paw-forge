@@ -7,7 +7,8 @@
     "build": "node scripts/build.mjs",
     "dev": "node scripts/serve.mjs --watch",
     "preview": "node scripts/serve.mjs",
-    "audit": "lighthouse http://localhost:4173 --chrome-flags=\"--headless --no-sandbox\" --output=html --output=json --output-path=./lighthouse-report"
+    "audit": "lighthouse http://localhost:4173 --chrome-flags=\"--headless --no-sandbox\" --output=html --output=json --output-path=./lighthouse-report",
+    "test": "node tests/publication.test.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.8",

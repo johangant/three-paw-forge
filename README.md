@@ -75,9 +75,23 @@ Use the actual generated filenames, widths, and height; small originals produce 
 
 Thumbnails use WebP where supported and JPEG otherwise. Selecting a photograph opens the native modal dialog, with its caption, photograph count, previous/next buttons, and a direct-image link. Left/right arrows browse; Home/End select the first/last photograph; Escape or Close dismisses it and returns focus to the opening thumbnail. JavaScript is loaded only on Patch’s page. Without JavaScript or modal-dialog support, gallery links still open the JPEG directly. No external gallery library is used.
 
+## FAQ and publication dates
+
+The FAQ has its own page at `/faq/`, linked from the main navigation. Edit the questions, answers and optional links in `src/_data/faq.json`; its markup lives in `src/_includes/sections/faq.njk`.
+
+Each footer shows **First published** and **Last updated** as quiet, page-specific metadata. The build adds semantic `<time>` elements when dates are known. Dates use the Europe/London calendar day of the publishing build; they become public with its Pages deployment, not on a local edit, commit or build. They are release dates, not precise deployment-completion timestamps.
+
+The Pages workflow sets `PUBLICATION_MODE=publish` and supplies the configured site URL. The build reads `publication.json` from the current live site, compares each page's rendered HTML and its referenced local images, styles, scripts and icons, and carries unchanged dates forward. Changed pages receive the new release date; previously unseen pages receive their first publication date too. Shared header/footer/style changes can therefore update several pages. The new registry travels inside the same artifact as the HTML: a failed build or failed deployment does not update the live dates. No repository commits, CMS or separate writable service are needed. Network errors or invalid registry data fail the publishing build rather than silently reset history.
+
+Historical publication dates cannot be reconstructed reliably from Git commit dates. The existing five pages are registered in `assets/publication-history.json` with unknown dates, displayed as “not recorded”. Replace those null values only with confirmed publication dates in `YYYY-MM-DD` form. On the first deployment with tracking, last-updated dates are established; unknown historical first-publication dates remain unknown. The build also checks whether an unregistered page already exists before assigning a first-publication date when adopting tracking.
+
+Local builds never advance dates and never contact the live site. They use a copy of the deployed registry at `.cache/publication.json` if present, otherwise the tracked historical seeds. To preview known live dates, download the site's `/publication.json` to that ignored cache file first; do not cache the registry from a local build as publication evidence. Without a live copy, local previews may show “not recorded” even after the live site has dates. For a controlled release, `PUBLICATION_DATE=YYYY-MM-DD` can override the default release day; dates earlier than recorded history are rejected.
+
+`npm test` checks publication tracking, unchanged releases, changed assets, unknown history, and failure behaviour. The hosting workflow runs these checks before building.
+
 ## Hosting and contact map
 
-The output remains static files, with the existing `/`, `/work/`, `/about/`, and `/contact/` URLs. No CMS, database, or browser framework is required. GitHub Pages continues to run `npm ci` and `npm run build`; the workflow publishes pushes to `main`, not this proof-of-concept branch.
+The output remains static files, with the existing `/`, `/work/`, `/about/`, and `/contact/` URLs. No CMS, database, or browser framework is required. GitHub Pages continues to run `npm ci` and `npm run build`; the workflow publishes pushes to `main`.
 
 Set `BASE_PATH=/three-paw-forge` at build time for repository-subpath hosting. Leave it empty for a domain root. Templates use root-relative URLs; a final Eleventy transform prefixes local `href`, `src`, and `srcset` values. Preview a prefixed build on a host mounted at that prefix; the bundled preview server serves the output at its root.
 

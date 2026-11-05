@@ -1,0 +1,40 @@
+[
+  {
+    "question": "Can I commission something from you?",
+    "answer": "Yes — email workshop@threepawforge.co.uk and some indication of what you're looking for."
+  },
+  {
+    "question": "What's your social media page?",
+    "answer": "I don't have one. Believe it or not before those companies existed people used to read other people's websites. This is mine. You can read it and I won't track you, sell your data or usage habits. If you send a link to a friend, thank you, I don't think I need to serruptitiously track that kind of activity even if it's never been easier to do that. If you want to reach me you can send me an email. I read them all."
+  },
+  {
+    "question": "Where is Three Paw Forge based?",
+    "answer": "In Glarryford, on the edges of the Antrim Glens in Northern Ireland. It's very nice."
+  },
+  {
+    "question": "Where does the name come from?",
+    "answer": "Patch, our resident farm cat, gave Three Paw Forge its name. She now lives life on three paws and keeps an eye on things around the workshop.",
+    "url": "/about/patch/",
+    "linkLabel": "Meet Patch"
+  },
+  {
+    "question": "What tools do you use?",
+    "answer": "Most of my tools are second hand from garage clear outs. I have a small gas forge, a Stahlwerk MIG welder, a small vevor anvil. The only 'fancy' things I have are two hammers made by Nigel Barnett (http://www.artist-blacksmith.co.uk). Blacksmiths tend to make their own tools, although to get me started I've picked up most of my stuff second hand for now. I made a pair of tongs once which was harder than I expected!"
+  },
+  {
+    "question": "Can you make me a knife?",
+    "answer": "No, sorry. If you're lucky enough to get one from me the chances are we know each other well and it's a gift. Happy to put you in touch with the person who taught me though, just ask."
+  },
+  {
+    "question": "Do you use AI?",
+    "answer": "In my day job, quite a lot. Here... only to speed up administrative work or research and never for creative work. What you're reading are my words in my voice, for better or worse."
+  },
+  {
+    "question": "What do you use for this website?",
+    "answer": "I made it myself using a few open source and freely available tools: it's a static site with no moving parts for speed, cost and security. Not only that but it sits behind a CDN for improved speed and network level protections from today's pain-in-the-ass AI enhanced security threats. Best thing is: it costs me nothing apart from the domain name and I'm in full control. If you're really interested read https://github.com/johangant/three-paw-forge/blob/main/README.md"
+  },
+  {
+    "question": "How did you get started with this project?",
+    "answer": "I'd love to say I had a plan but I didn't. I finished an evening language course and needed something new. I wasn't very practical and could barely put a shelf up on the wall (let alone swing a hammer at hot steel) and found a place nearby that could teach me how to make a kitchen knife. That seemed interesting. So I turned up like a total beginner and have been learning day by day. This kind of work keeps me humble and there's always someone making ever more amazing stuff that gives me ideas and aspirations of my own. But mostly it's just bouncing between many \"happy accidents\" and adapting to how each project plays out, especially if it's my first attempt at something!"
+  }
+]
