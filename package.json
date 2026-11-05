@@ -8,12 +8,13 @@
     "dev": "node scripts/serve.mjs --watch",
     "preview": "node scripts/serve.mjs",
     "audit": "lighthouse http://localhost:4173 --chrome-flags=\"--headless --no-sandbox\" --output=html --output=json --output-path=./lighthouse-report",
-    "test": "node tests/publication.test.mjs"
+    "test": "node --test tests/*.test.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.8",
     "@tailwindcss/cli": "^4.1.0",
     "lighthouse": "^13.4.1",
+    "markdown-it": "^14.3.3",
     "tailwindcss": "^4.1.0"
   },
   "engines": {

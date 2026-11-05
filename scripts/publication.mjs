@@ -85,6 +85,18 @@ async function readLocalHistory(path) {
   catch (error) { if (error.code === 'ENOENT') return emptyHistory(); throw error; }
 }
 
+// configure-pages can report an HTTP base URL for a custom domain. Always read
+// its publication registry over HTTPS, preserving the hostname and project path.
+export function normalizePublicationUrl(value) {
+  const url = new URL(value);
+  if (url.protocol === 'http:') url.protocol = 'https:';
+  if (url.protocol !== 'https:') throw new Error('Publication URL must use HTTP or HTTPS.');
+  if (url.username || url.password) throw new Error('Publication URL must not contain credentials.');
+  url.search = '';
+  url.hash = '';
+  return url.href.replace(/\/$/, '');
+}
+
 async function publishedHistory(baseUrl) {
   const response = await fetch(`${baseUrl}/publication.json?release=${Date.now()}`, { cache: 'no-store', signal: AbortSignal.timeout(20000) });
   if (response.status === 404) {
@@ -103,9 +115,7 @@ export async function annotatePublication(directory = 'dist') {
   let baseUrl;
   if (publishing) {
     if (!process.env.PUBLICATION_BASE_URL) throw new Error('Publishing requires PUBLICATION_BASE_URL.');
-    baseUrl = new URL(process.env.PUBLICATION_BASE_URL);
-    if (baseUrl.protocol !== 'https:') throw new Error('Publication URL must use HTTPS.');
-    baseUrl = baseUrl.href.replace(/\/$/, '');
+    baseUrl = normalizePublicationUrl(process.env.PUBLICATION_BASE_URL);
     history = await publishedHistory(baseUrl);
   }
   const releaseDate = publishing ? (process.env.PUBLICATION_DATE || new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London' }).format(new Date())) : null;
@@ -125,6 +135,11 @@ export async function annotatePublication(directory = 'dist') {
     }
     const hash = await pageHash(html, directory, basePath);
     const record = publicationRecord(history?.pages[url], legacy, hash, releaseDate);
+    if (publishing) {
+      const previous = history?.pages[url];
+      const status = previous?.hash === hash ? 'Unchanged' : (previous || legacy ? 'Updated' : 'Added');
+      console.log(`[publication] ${status} ${url} — first published: ${record.firstPublished ?? 'not recorded'}, last updated: ${record.lastUpdated ?? 'not recorded'}`);
+    }
     result.pages[url] = record;
     await writeFile(path, html.replace(marker, renderDates(record)));
   }

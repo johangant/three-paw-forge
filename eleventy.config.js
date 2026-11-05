@@ -1,7 +1,9 @@
+import { renderFaqAnswer } from './scripts/faq-markdown.mjs';
 import { renderContactMap } from './scripts/contact-map.mjs';
 import { normalizeBasePath, applyBasePath } from './scripts/site-paths.mjs';
 
 export default function (eleventyConfig) {
+  eleventyConfig.addFilter('faqMarkdown', renderFaqAnswer);
   eleventyConfig.setNunjucksEnvironmentOptions({ autoescape: true });
   eleventyConfig.addShortcode('contactMap', () => renderContactMap(process.env.GOOGLE_MAPS_STATIC_API_KEY));
   eleventyConfig.addCollection('pieces', api => api.getFilteredByTag('pieces')
