@@ -1,5 +1,8 @@
 <article class="min-w-0">
-<a href="{{ piece.data.image.src }}" class="block aspect-[3/4] overflow-hidden bg-coal" aria-label="View photograph: {{ piece.data.title }}"><img src="{{ piece.data.image.src }}" srcset="{{ piece.data.image.srcset }}" sizes="(min-width: 1280px) 373px, (min-width: 768px) calc((100vw - 160px) / 3), calc(100vw - 48px)" width="{{ piece.data.image.width }}" height="{{ piece.data.image.height }}" alt="{{ piece.data.image.alt }}"{% if page.url == '/work/' and loop.first %} fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async" class="h-full w-full object-contain"></a>
+<a href="{{ piece.data.image.src }}" class="block aspect-[3/4] overflow-hidden bg-coal" aria-label="View photograph: {{ piece.data.title }}"><picture class="block h-full w-full">
+<source type="image/webp" srcset="{{ piece.data.image.srcset | replace(r/\.jpg/g, '.webp') }}" sizes="(min-width: 1280px) 373px, (min-width: 768px) calc((100vw - 160px) / 3), calc(100vw - 48px)">
+<img src="{{ piece.data.image.src }}" srcset="{{ piece.data.image.srcset }}" sizes="(min-width: 1280px) 373px, (min-width: 768px) calc((100vw - 160px) / 3), calc(100vw - 48px)" width="{{ piece.data.image.width }}" height="{{ piece.data.image.height }}" alt="{{ piece.data.image.alt }}"{% if page.url == '/work/' and loop.first %} fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async" class="h-full w-full object-contain">
+</picture></a>
 {% if page.url == '/work/' %}<h2 class="mt-4 font-serif text-2xl">{{ piece.data.title }}</h2>{% else %}<h3 class="mt-4 font-serif text-2xl">{{ piece.data.title }}</h3>{% endif %}
 <div class="mt-2 text-sm leading-relaxed">{{ piece.templateContent | safe }}</div>
 </article>

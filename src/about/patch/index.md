@@ -4,6 +4,11 @@ title: Patch — the cat behind Three Paw Forge
 description: Meet Patch, the three-pawed farm cat who gave Three Paw Forge its name, and see photographs of her around the garden.
 permalink: /about/patch/
 heading: Meet Patch.
+previewImage:
+  src: /images/patch-portrait-1086.jpg
+  alt: Patch, a black cat with a white chest patch, sitting on a stone wall in the sunshine
+  width: 1086
+  height: 1448
 subtitle: The cat behind the name.
 portrait:
   src: /images/patch-portrait-1086.jpg

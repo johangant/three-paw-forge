@@ -1,8 +1,14 @@
 import { renderFaqAnswer } from './scripts/faq-markdown.mjs';
 import { renderContactMap } from './scripts/contact-map.mjs';
 import { normalizeBasePath, applyBasePath } from './scripts/site-paths.mjs';
+import site from './src/_data/site.json' with { type: 'json' };
 
 export default function (eleventyConfig) {
+  // Search metadata always identifies the production URL, including in local previews.
+  eleventyConfig.addFilter('absoluteUrl', path => new URL(path, `${site.url}/`).href);
+  eleventyConfig.addCollection('sitemapPages', api => api.getAll()
+    .filter(item => typeof item.outputPath === 'string' && item.outputPath.endsWith('.html') && item.url)
+    .sort((a, b) => a.url.localeCompare(b.url)));
   eleventyConfig.addFilter('faqMarkdown', renderFaqAnswer);
   eleventyConfig.setNunjucksEnvironmentOptions({ autoescape: true });
   eleventyConfig.addShortcode('contactMap', () => renderContactMap(process.env.GOOGLE_MAPS_STATIC_API_KEY));

@@ -43,7 +43,7 @@ async function htmlFiles(directory) {
 }
 
 export async function pageDependencies(source, html, cwd = process.cwd(), basePath = '') {
-  const dependencies = new Set(['src/styles.css', 'eleventy.config.js', 'scripts/build.mjs', 'scripts/publication.mjs', 'scripts/site-paths.mjs', 'package.json', 'package-lock.json']);
+  const dependencies = new Set(['src/styles.css', 'eleventy.config.js', 'scripts/build.mjs', 'scripts/publication.mjs', 'scripts/site-paths.mjs', 'scripts/asset-versions.mjs', 'package.json', 'package-lock.json']);
   const visited = new Set();
   async function template(path) {
     if (visited.has(path)) return;

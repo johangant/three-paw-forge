@@ -11,7 +11,10 @@ layout: layouts/base.njk
 <a href="#patch-gallery" class="mt-6 inline-block py-2 font-bold">Photographs of Patch ↓</a>
 </div>
 <figure class="mx-auto w-full max-w-sm">
+<picture class="block w-full">
+<source type="image/webp" srcset="{{ portrait.srcset | replace(r/\.jpg/g, '.webp') }}" sizes="(min-width: 432px) 384px, calc(100vw - 48px)">
 <img src="{{ portrait.src }}" srcset="{{ portrait.srcset }}" sizes="(min-width: 432px) 384px, calc(100vw - 48px)" width="{{ portrait.width }}" height="{{ portrait.height }}" alt="{{ portrait.alt }}" fetchpriority="high" decoding="async" class="block h-auto w-full">
+</picture>
 <figcaption class="mt-3 text-sm leading-relaxed">{{ portrait.caption }}</figcaption>
 </figure>
 </div>

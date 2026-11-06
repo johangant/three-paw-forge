@@ -6,6 +6,18 @@
 <meta name="description" content="{{ description }}">
 <meta name="theme-color" content="#20221f">
 <title>{{ title }}</title>
+<link rel="canonical" href="{{ page.url | absoluteUrl }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:url" content="{{ page.url | absoluteUrl }}">
+{% if previewImage %}
+<meta property="og:image" content="{{ previewImage.src | absoluteUrl }}">
+<meta property="og:image:alt" content="{{ previewImage.alt }}">
+<meta property="og:image:width" content="{{ previewImage.width }}">
+<meta property="og:image:height" content="{{ previewImage.height }}">
+{% endif %}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/styles.css">
 </head>
