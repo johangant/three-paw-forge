@@ -14,6 +14,11 @@ const reloadScript = '<script>new EventSource("/__livereload").onmessage=()=>loc
 if (watchMode) await build();
 
 createServer(async (req, res) => {
+  // Set these before routing so assets, redirects, errors and live reload share them.
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
   try {
     const requestUrl = new URL(req.url, 'http://localhost');
     const pathname = decodeURIComponent(requestUrl.pathname);
@@ -38,7 +43,7 @@ createServer(async (req, res) => {
     if (watchMode && extname(file) === '.html') {
       body = body.toString().replace('</body>', `${reloadScript}</body>`);
     }
-    res.writeHead(200, { 'Content-Type': types[extname(file)] || 'application/octet-stream', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-cache' });
+    res.writeHead(200, { 'Content-Type': types[extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
     res.end(body);
   } catch { res.writeHead(404, { 'Content-Type': 'text/plain' }); res.end('Not found'); }
 }).listen(port, '127.0.0.1', () => console.log(`${watchMode ? 'Development' : 'Preview'}: http://localhost:${port}`));
