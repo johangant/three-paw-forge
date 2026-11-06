@@ -45,7 +45,17 @@ createServer(async (req, res) => {
     }
     res.writeHead(200, { 'Content-Type': types[extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
     res.end(body);
-  } catch { res.writeHead(404, { 'Content-Type': 'text/plain' }); res.end('Not found'); }
+  } catch {
+    try {
+      let body = await readFile(resolve(root, '404.html'), 'utf8');
+      if (watchMode) body = body.replace('</body>', `${reloadScript}</body>`);
+      res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
+      res.end(body);
+    } catch {
+      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('Not found');
+    }
+  }
 }).listen(port, '127.0.0.1', () => console.log(`${watchMode ? 'Development' : 'Preview'}: http://localhost:${port}`));
 
 if (watchMode) {
