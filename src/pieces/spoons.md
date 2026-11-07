@@ -1,6 +1,6 @@
 ---
 permalink: /work/spoons/
-title: "Spoons"
+title: "Coffee/tea scoops"
 description: "Copper bowls, twisted handles and curled finishes."
 summary: "Copper bowls, twisted handles and curled finishes."
 order: 1
@@ -9,14 +9,16 @@ gallery:
   - image: "work/spoons/copper-spoon"
     fit: contain
     alt: "Copper spoon with a long twisted dark handle and curled end on a wooden surface"
-    caption: "A copper bowl, a twisted handle, and a curled finish."
+    caption: "Folds and twist."
   - image: "work/spoons/IMG_4045"
     fit: contain
     alt: "Copper spoon presented in a wooden box lined with straw"
-    caption: "Ready in its presentation box."
+    caption: "Copper inlay with twist in a presentation box."
   - image: "work/spoons/IMG_8629"
     fit: contain
-    alt: "Copper spoon with a patterned metal handle resting beside a square opening"
-    caption: "A closer look at the bowl and patterned handle."
+    alt: "Copper spoon with a patterned metal handle resting on a coffee tin."
+    caption: "My first forged scoop. I still use this every day."
 ---
-Copper bowls, twisted handles and curled finishes.
+These copper and steel coffee scoop/serving spoons are popular and look right at home in any country style kitchen or trendy cafe. Use them with dry ingredients or just as a decorative piece.
+
+They're fun to make and there are many design variants I've tried. My first one was made from old boiler copper sheet and offcuts from other projects and it's still the one I use at home every day for my morning brew.

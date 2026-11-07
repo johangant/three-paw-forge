@@ -1,8 +1,8 @@
 ---
 permalink: /work/winerack/
 title: "Wine racks"
-description: "Horseshoe curves arranged to hold bottles."
-summary: "Horseshoe curves arranged to hold bottles."
+description: "A wine rack made from horse shoes."
+summary: "A wine rack made from horse shoes."
 order: 9
 cover: "work/winerack/IMG_7113"
 gallery:
@@ -13,18 +13,18 @@ gallery:
   - image: "work/winerack/IMG_7092"
     fit: contain
     alt: "Unpainted horseshoe wine rack outdoors on a tree stump"
-    caption: "The rack before painting."
+    caption: "Getting ready to prime with paint."
   - image: "work/winerack/IMG_7093"
     fit: contain
     alt: "Pale horseshoe wine rack on a workshop bench"
-    caption: "Trying a lighter finish."
+    caption: "Primed and making me wonder if it's nicer in white..."
   - image: "work/winerack/IMG_7098"
     fit: contain
     alt: "Black horseshoe wine rack holding a bottle on a workshop bench"
-    caption: "A dark finish in the workshop."
+    caption: "Finished in black and checking the fit."
   - image: "work/winerack/IMG_7113"
     fit: contain
     alt: "Finished black horseshoe wine rack holding a bottle in front of a decorative plate"
-    caption: "The finished rack with a bottle in place."
+    caption: "Finished and decorated."
 ---
-Horseshoe curves arranged to hold bottles.
+My first project with the welder! Took me some time to get the assembly correct. It was well received as a Christmas gift for a horse loving family.

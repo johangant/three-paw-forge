@@ -43,4 +43,12 @@ gallery:
     alt: "Circular serpent form beside the glowing workshop forge"
     caption: "The circular serpent taking shape in the workshop."
 ---
-Jörmungandr: a branching tree within a circular serpent. These photographs follow the work from the first pencil sketch through heating and shaping the metal to bringing the tree and serpent together.
+My largest piece to date and one that's too big for my home workshop so I'm making at Hot Milk Forge with access to a coal forge and power hammer.
+
+It's a project that never seems to end! This project is going to show a bit of Norse mythology; the serpent of Midgard (Jörmungandr), wrapped around the tree of life (Yggdrasil). It'll be mounted on a wooden backing and will likely be a wall decoration.
+
+This project began as a dabble in how to make a snake. It then morphed into a potentially large shed door handle, before I settled on a circular arrangement for both serpent and tree.
+
+The tree has two sets of steel bar intertwined and the serpent has two segments of steel twisted together.
+
+I am presently forging a number of leaves to adorn the tree before I move into final details including texturing the steel and considering how to mount it to a wooden backing.

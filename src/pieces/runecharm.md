@@ -1,13 +1,13 @@
 ---
 permalink: /work/runecharm/
-title: "Rune charm"
-description: "A small charm with a copper-coloured rune detail."
-summary: "A small charm with a copper-coloured rune detail."
+title: "Bindrune keychain"
+description: "Keychain with a copper bindrune sitting on a wooden coaster."
+summary: "Keychain with a copper bindrune sitting on a wooden coaster."
 order: 10
 cover: "work/runecharm/IMG_3070"
 gallery:
   - image: "work/runecharm/IMG_3070"
-    alt: "Dark rectangular charm with a copper-coloured rune on a round wooden slice"
-    caption: "A small rune charm."
+    alt: "Keychain with a copper bindrune sitting on a wooden coaster."
+    caption: "Custom bindrune inlaid with copper."
 ---
-A small charm with a copper-coloured rune detail.
+A commission where I designed a custom bindrune for a keychain, inlaid by hand with copper wire into a textured steel backing.

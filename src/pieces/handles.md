@@ -15,4 +15,4 @@ gallery:
     alt: "Dark metal handle with sculpted pointed ends fixed to a wooden door"
     caption: "Another approach to the door handle."
 ---
-Twists, texture and useful everyday objects.
+A few door handles I've made so far ranging from a simple twist to a rope design on a shed door.

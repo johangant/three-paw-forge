@@ -3,6 +3,7 @@ import { watch } from 'node:fs';
 import { readFile, stat } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
 import { build } from './build.mjs';
+import { sourcePaths, sourceSnapshot, changedSources } from './source-changes.mjs';
 
 const root = resolve('dist');
 const port = Number(process.env.PORT || 4173);
@@ -59,6 +60,7 @@ createServer(async (req, res) => {
 }).listen(port, '127.0.0.1', () => console.log(`${watchMode ? 'Development' : 'Preview'}: http://localhost:${port}`));
 
 if (watchMode) {
+  let previousSources = await sourceSnapshot();
   let rebuildTimer;
   let rebuilding = false;
   let rebuildQueued = false;
@@ -70,8 +72,12 @@ if (watchMode) {
     }
 
     rebuilding = true;
-    console.log('Source changed. Rebuilding...');
     try {
+      const currentSources = await sourceSnapshot();
+      const changed = changedSources(previousSources, currentSources);
+      if (!changed.length) return;
+      previousSources = currentSources;
+      console.log(`Source changed (${changed.join(', ')}). Rebuilding...`);
       await build();
       for (const client of reloadClients) client.write('data: reload\n\n');
       console.log('Build complete. Browser reloaded.');
@@ -91,10 +97,7 @@ if (watchMode) {
     rebuildTimer = setTimeout(() => void rebuild(), 100);
   }
 
-  watch('eleventy.config.js', scheduleRebuild);
-  watch('assets/images.json', scheduleRebuild);
-
-  for (const directory of ['src', 'public', 'scripts']) {
-    watch(directory, { recursive: true }, scheduleRebuild);
+  for (const path of sourcePaths) {
+    watch(path, { recursive: true }, scheduleRebuild);
   }
 }

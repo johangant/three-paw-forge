@@ -18,12 +18,12 @@
     "linkLabel": "Meet Patch"
   },
   {
-    "question": "What tools do you use?",
-    "answer": "Most of my tools are second hand from garage clear outs. I have a small gas forge, a Stahlwerk MIG welder, a small vevor anvil. The only 'fancy' things I have are two hammers made by [Nigel Barnett](http://www.artist-blacksmith.co.uk). Blacksmiths tend to make their own tools, although to get me started I've picked up most of my stuff second hand for now. I made a pair of tongs once which was harder than I expected!"
-  },
-  {
     "question": "Can you make me a knife?",
     "answer": "No, sorry. If you're lucky enough to get one from me the chances are we know each other well and it's a gift. Happy to put you in touch with the person who taught me though, just ask."
+  },
+  {
+    "question": "How did you get started with this project?",
+    "answer": "I'd love to say I had a plan but I didn't. I finished an evening language course and needed something new. I wasn't very practical and could barely put a shelf up on the wall (let alone swing a hammer at hot steel) and found [Eamonn Higgins at Hot Milk Forge](https://www.artistblacksmithschool.com/) who could teach me how to make a kitchen knife. That seemed interesting. So I turned up like a total beginner and have been learning day by day. This kind of work keeps me humble and there's always someone making ever more amazing stuff that gives me ideas and aspirations of my own. But mostly it's just bouncing between many \"happy accidents\" and adapting to how each project plays out, especially if it's my first attempt at something!"
   },
   {
     "question": "Do you use AI?",
@@ -32,9 +32,5 @@
   {
     "question": "What do you use for this website?",
     "answer": "I made it myself using a few open source and freely available tools: it's a static site with no moving parts for speed, cost and security. Not only that but it sits behind a CDN for improved speed and network level protections from today's pain-in-the-ass AI enhanced security threats. Best thing is: it costs me nothing apart from the domain name and I'm in full control. If you're really interested [read more here](https://github.com/johangant/three-paw-forge/blob/main/README.md)."
-  },
-  {
-    "question": "How did you get started with this project?",
-    "answer": "I'd love to say I had a plan but I didn't. I finished an evening language course and needed something new. I wasn't very practical and could barely put a shelf up on the wall (let alone swing a hammer at hot steel) and found [Eamonn Higgins at Hot Milk Forge](https://www.artistblacksmithschool.com/) who could teach me how to make a kitchen knife. That seemed interesting. So I turned up like a total beginner and have been learning day by day. This kind of work keeps me humble and there's always someone making ever more amazing stuff that gives me ideas and aspirations of my own. But mostly it's just bouncing between many \"happy accidents\" and adapting to how each project plays out, especially if it's my first attempt at something!"
   }
 ]
