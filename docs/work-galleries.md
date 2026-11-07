@@ -110,3 +110,11 @@ Image IDs match the source paths without extensions. `order` is optional; otherw
 ## Thumbnail framing
 
 Gallery entries support `fit: contain` to show an entire photograph, or `fit: cover` with `focalPoint: "50% 35%"` to choose the crop alignment. Covers and homepage features inherit those settings; homepage selection entries can override them independently. Frames stay 4:3, and lightbox images stay uncropped. See [the framing review](image-focal-points.md) for the two images needing your judgement and examples of how to communicate a focal point.
+
+## Markdown content on a work page
+
+Edit the matching `src/pieces/*.md` file. The page order is title, optional introduction, photograph gallery, then Markdown text. Add an optional `intro` field in the front matter for a short introduction above the images; omit it or leave it empty to hide that block. Everything after the closing `---` is Markdown displayed below the photograph gallery. Add as many paragraphs or sections as you need; use `##` for section headings (the template supplies the page title), `###` for subheadings, `-` for lists, `>` for quotes, and `[link text](/contact/)` for links. Separate paragraphs with blank lines. The same formatting works in `src/stories/*.md`.
+
+Keep image IDs, captions and alt text in the front matter's `gallery` array to use the responsive images and accessible lightbox. A starting template is in `docs/templates/work-project.md`; replace its example wording before copying it into `src/pieces/`.
+
+First published and last updated dates appear consistently in the footer. Both come from Git history at build time; uncommitted edits do not advance the dates, and new uncommitted pages display “not yet committed”. No manual date fields are needed.

@@ -2,6 +2,7 @@
 permalink: /work/spoons/copper-spoon/
 project: spoons
 title: The copper spoon
+intro: Optional short introduction above the images. Remove this field to omit it.
 description: Replace this with a short description of your project story.
 gallery:
   - image: work/spoons/copper-spoon

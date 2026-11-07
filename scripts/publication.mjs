@@ -112,7 +112,7 @@ export async function annotatePublication(directory = 'dist') {
     if (!source.startsWith('src/') || source.split('/').includes('..')) throw new Error('Invalid publication source path.');
     const dependencies = await pageDependencies(source, html, process.cwd(), basePath);
     const dates = gitDates(source, dependencies);
-    await writeFile(path, html.replace(marker[0], renderDates(dates)));
+    await writeFile(path, html.replaceAll(marker[0], renderDates(dates)));
     console.log(`[dates] ${source}: first ${dates.firstPublished ?? 'uncommitted'}, updated ${dates.lastUpdated ?? 'uncommitted'}`);
   }
 }

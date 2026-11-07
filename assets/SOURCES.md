@@ -44,3 +44,7 @@ The owner added 14 JPEG/HEIC photographs to `assets/source/` for Patch’s galle
 ## Organised work galleries
 
 Owner-supplied photographs are now grouped under `assets/source/work/<project>/`, with Patch’s originals under `assets/source/patch/`. Work images retain those project namespaces in their responsive JPEG/WebP output paths. The 13 project content files under `src/pieces/` curate 33 photographs; captions describe the visible work without assuming dates, materials or commission availability. Homepage selections are maintained separately in `src/_data/featuredWork.json`. Originals and the owner’s folder organisation are preserved.
+
+### Jörmungandr gallery additions
+
+Eight owner-supplied photographs in `assets/source/work/ouroborus/` extend the existing sketch gallery with workshop and finished-piece images. Responsive JPEG and WebP copies use widths up to 1600 pixels, preserve the full frame and remove metadata. IMG_4042 is the cover; captions and descriptions are maintained in `src/pieces/ouroborus.md`. The existing page URL is retained.

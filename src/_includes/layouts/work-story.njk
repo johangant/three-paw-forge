@@ -5,7 +5,9 @@ layout: layouts/base.njk
 <a href="/work/{{ project }}/" class="inline-block py-2 text-sm">← Back to the gallery</a>
 <p class="mt-8 mb-3 text-xs font-bold uppercase tracking-widest text-copper">The story behind the work</p>
 <h1 id="story-title" class="max-w-4xl font-serif text-4xl md:text-6xl">{{ title }}</h1>
-<div class="mt-8 max-w-3xl text-lg leading-relaxed">{{ content | safe }}</div>
+{% if intro %}
+<p class="mt-6 max-w-2xl text-lg leading-relaxed">{{ intro }}</p>
+{% endif %}
 {% if gallery.length %}
 <div class="mt-12 grid items-start gap-10 sm:grid-cols-2 lg:grid-cols-3">
 {% for entry in gallery %}
@@ -13,6 +15,9 @@ layout: layouts/base.njk
 {% include "gallery-photo.njk" %}
 {% endfor %}
 </div>
+{% endif %}
+{% if content | trim %}
+<div class="work-content mt-10 max-w-3xl text-lg leading-relaxed">{{ content | safe }}</div>
 {% endif %}
 <p class="mt-10"><a href="/contact/" class="inline-block py-2 font-bold">Ask about this piece →</a></p>
 </section>

@@ -26,7 +26,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection('featuredWork', api => selectFeatured(featured, api.getFilteredByTag('pieces'), images));
   eleventyConfig.addTransform('basePath', function (content) {
     if (typeof this.page.outputPath !== 'string' || !this.page.outputPath.endsWith('.html')) return content;
-    const marked = content.replace('<!--PUBLICATION_DATES-->', `<!--PUBLICATION_DATES:${encodeURIComponent(this.page.inputPath)}-->`);
+    const marked = content.replaceAll('<!--PUBLICATION_DATES-->', `<!--PUBLICATION_DATES:${encodeURIComponent(this.page.inputPath)}-->`);
     return applyBasePath(marked, normalizeBasePath(process.env.BASE_PATH));
   });
   return {
