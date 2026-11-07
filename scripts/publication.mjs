@@ -1,6 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import { readFile, readdir, writeFile } from 'node:fs/promises';
-import { resolve, relative, sep } from 'node:path';
+import { resolve, relative, dirname, basename, sep } from 'node:path';
 import { normalizeBasePath } from './site-paths.mjs';
 
 function git(args, cwd) {
@@ -59,11 +59,33 @@ export async function pageDependencies(source, html, cwd = process.cwd(), basePa
     if (/\bfaq\b/.test(text)) dependencies.add('src/_data/faq.json');
     if (/\bfaqMarkdown\b/.test(text)) dependencies.add('scripts/faq-markdown.mjs');
     if (/\bcontactMap\b/.test(text)) dependencies.add('scripts/contact-map.mjs');
-    if (/\bcollections\.(?:pieces|featuredPieces)\b/.test(text)) {
+    if (/\b(?:workPhoto|projectCard|collections\.featuredWork)\b/.test(text)) {
+      dependencies.add('scripts/work-gallery.mjs');
+      dependencies.add('assets/images.json');
+    }
+    if (/\bcurrentWorkPhotos\b/.test(text)) {
+      dependencies.add('src/_data/currentWork.json');
+      dependencies.add('scripts/work-gallery.mjs');
+      dependencies.add('assets/images.json');
+      dependencies.add('assets/source/work/wip');
+    }
+    if (/\bcollections\.featuredWork\b/.test(text)) dependencies.add('src/_data/featuredWork.json');
+    if (/\bcollections\.(?:pieces|featuredWork)\b/.test(text)) {
       dependencies.add('src/pieces'); // A directory pathspec includes additions and deletions too.
     }
   }
   await template(source);
+  // Directory data supplies project layouts and permalinks to each Markdown file.
+  let parent = dirname(source);
+  while (parent === 'src' || parent.startsWith('src/')) {
+    const dataPath = `${parent}/${basename(parent)}.json`;
+    try {
+      const data = JSON.parse(await readFile(resolve(cwd, dataPath), 'utf8'));
+      dependencies.add(dataPath);
+      if (data.layout) await template(`src/_includes/${data.layout}`);
+    } catch (error) { if (error.code !== 'ENOENT') throw error; }
+    parent = dirname(parent);
+  }
   for (const match of html.matchAll(/\b(?:src|href|srcset)="([^"]*)"/g)) {
     for (const candidate of match[1].split(',')) {
       const url = candidate.trim().split(/\s+/)[0];

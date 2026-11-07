@@ -1,8 +1,11 @@
 <article class="min-w-0">
-<a href="{{ piece.data.image.src }}" class="block aspect-[3/4] overflow-hidden bg-coal" aria-label="View photograph: {{ piece.data.title }}"><picture class="block h-full w-full">
-<source type="image/webp" srcset="{{ piece.data.image.srcset | replace(r/\.jpg/g, '.webp') }}" sizes="(min-width: 1280px) 373px, (min-width: 768px) calc((100vw - 160px) / 3), calc(100vw - 48px)">
-<img src="{{ piece.data.image.src }}" srcset="{{ piece.data.image.srcset }}" sizes="(min-width: 1280px) 373px, (min-width: 768px) calc((100vw - 160px) / 3), calc(100vw - 48px)" width="{{ piece.data.image.width }}" height="{{ piece.data.image.height }}" alt="{{ piece.data.image.alt }}"{% if page.url == '/work/' and loop.first %} fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async" class="h-full w-full object-contain">
-</picture></a>
-{% if page.url == '/work/' %}<h2 class="mt-4 font-serif text-2xl">{{ piece.data.title }}</h2>{% else %}<h3 class="mt-4 font-serif text-2xl">{{ piece.data.title }}</h3>{% endif %}
-<div class="mt-2 text-sm leading-relaxed">{{ piece.templateContent | safe }}</div>
+<a href="{{ card.url }}" class="block aspect-[4/3] overflow-hidden bg-coal/5" aria-label="Explore {{ card.title }}">
+<picture class="block h-full w-full">
+<source type="image/webp" srcset="{{ card.image.webpSrcset }}" sizes="(min-width: 1280px) 373px, (min-width: 768px) calc((100vw - 160px) / 3), calc(100vw - 48px)">
+<img src="{{ card.image.src }}" srcset="{{ card.image.srcset }}" sizes="(min-width: 1280px) 373px, (min-width: 768px) calc((100vw - 160px) / 3), calc(100vw - 48px)" width="{{ card.image.width }}" height="{{ card.image.height }}" alt="{{ card.image.alt }}" loading="lazy" decoding="async" class="h-full w-full" style="object-fit: {{ card.image.fit }}; object-position: {{ card.image.focalPoint }};">
+</picture>
+</a>
+{% if page.url == '/work/' %}<h2 class="mt-4 font-serif text-2xl"><a href="{{ card.url }}">{{ card.title }}</a></h2>{% else %}<h3 class="mt-4 font-serif text-2xl"><a href="{{ card.url }}">{{ card.title }}</a></h3>{% endif %}
+<p class="mt-2 text-sm leading-relaxed">{{ card.description }}</p>
+{% if card.image.story %}<p class="mt-2 text-sm"><a href="{{ card.image.story }}" class="inline-block py-2 font-bold">{{ card.image.storyLabel or "Read the project story" }} →</a></p>{% endif %}
 </article>

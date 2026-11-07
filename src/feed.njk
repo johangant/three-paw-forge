@@ -1,0 +1,6 @@
+---
+permalink: /feed.xml
+layout: false
+eleventyExcludeFromCollections: true
+---
+{{ collections.pieces | workRss(site) | safe }}

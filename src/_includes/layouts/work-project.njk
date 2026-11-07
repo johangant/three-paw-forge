@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+---
+<section class="mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-24" aria-labelledby="project-title">
+<a href="/work/" class="inline-block py-2 text-sm">← All the work</a>
+<p class="mt-8 mb-3 text-xs font-bold uppercase tracking-widest text-copper">From the workshop</p>
+<h1 id="project-title" class="font-serif text-4xl md:text-6xl">{{ title }}</h1>
+<div class="mt-6 max-w-2xl text-lg leading-relaxed">{{ content | safe }}</div>
+<p class="mt-4 text-sm">Select a photograph to see the full image and caption.</p>
+<div class="mt-10 grid items-start gap-10 sm:grid-cols-2 lg:grid-cols-3">
+{% for entry in gallery %}
+{% set photo = entry | workPhoto %}
+{% include "gallery-photo.njk" %}
+{% endfor %}
+</div>
+<p class="mt-10"><a href="/contact/" class="inline-block py-2 font-bold">Ask about the work →</a></p>
+</section>
+{% set galleryTitle = title %}
+{% include "gallery-lightbox.njk" %}

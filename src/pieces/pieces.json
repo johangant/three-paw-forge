@@ -1,4 +1,4 @@
 {
   "tags": "pieces",
-  "permalink": false
+  "layout": "layouts/work-project.njk"
 }

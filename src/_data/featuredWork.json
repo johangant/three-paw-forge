@@ -1,0 +1,17 @@
+[
+  {
+    "project": "spoons",
+    "image": "work/spoons/copper-spoon",
+    "title": "Copper spoon"
+  },
+  {
+    "project": "handles",
+    "image": "work/handles/door-handle",
+    "title": "Twisted door handle"
+  },
+  {
+    "project": "horse-tree",
+    "image": "work/horse-tree/horseshoe-tree",
+    "title": "Horseshoe Christmas tree"
+  }
+]

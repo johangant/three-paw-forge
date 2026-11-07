@@ -1,17 +1,17 @@
 ---
 layout: "layouts/base.njk"
 title: "Handcrafted Metalwork — Three Paw Forge"
-description: "Explore Johan’s metalcraft at Three Paw Forge: a copper spoon, twisted door handle and horseshoe Christmas tree."
+description: "Explore galleries of metalwork from Three Paw Forge, including spoons, handles, bells, horseshoe sculptures and workshop experiments."
 permalink: "/work/"
 previewImage:
-  src: /images/copper-spoon-489.jpg
+  src: /images/work/spoons/copper-spoon-489.jpg
   alt: Copper spoon with a twisted dark metal handle and curled end
   width: 489
   height: 720
 ---
-<section id="work" class="border-t border-coal/20 py-16 md:py-24" aria-labelledby="work-title"><div class="mx-auto max-w-7xl px-6 md:px-12"><div class="mb-10"><p class="mb-3 text-xs font-bold uppercase tracking-widest text-copper">The work</p><h1 id="work-title" class="font-serif text-4xl md:text-5xl">From the workshop</h1><p class="mt-5 max-w-2xl text-lg leading-relaxed">A selection of finished pieces, from useful everyday objects to something a little more decorative.</p></div><div class="grid gap-8 md:grid-cols-3">
+<section id="work" class="border-t border-coal/20 py-16 md:py-24" aria-labelledby="work-title"><div class="mx-auto max-w-7xl px-6 md:px-12"><div class="mb-10"><p class="mb-3 text-xs font-bold uppercase tracking-widest text-copper">The work</p><h1 id="work-title" class="font-serif text-4xl md:text-5xl">From the workshop</h1><p class="mt-5 max-w-2xl text-lg leading-relaxed">Finished pieces, workshop experiments and ideas taking shape. Choose a project to explore its photographs.</p></div><div class="grid gap-8 md:grid-cols-3">
 {% for piece in collections.pieces %}
+{% set card = piece | projectCard %}
 {% include "work-card.njk" %}
 {% endfor %}
 </div></div></section>
-<section class="mx-auto max-w-7xl px-6 pb-16 md:px-12" aria-labelledby="details-title"><h2 id="details-title" class="font-serif text-3xl">A closer look at the details</h2><p class="mt-5 max-w-2xl text-lg leading-relaxed">The spoon pairs a copper bowl with a twisted handle and curled end. The door handle uses a rope-like twist against a flat backplate. In the Christmas tree, repeated horseshoe shapes become a framework for lights and baubles.</p><p class="mt-4 max-w-2xl leading-relaxed">Select any photograph above to see the full image.</p><a href="/contact/" class="mt-6 inline-block py-2 font-bold">Ask about the work →</a></section>

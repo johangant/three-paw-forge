@@ -40,3 +40,7 @@ Edit prompt: “Edit target: supplied photograph of Patch, the real black cat si
 ## Patch gallery additions
 
 The owner added 14 JPEG/HEIC photographs to `assets/source/` for Patch’s gallery. Their original filenames and files are retained there. `scripts/optimise-images.py` converts HEIC through a temporary PNG with `heif-convert`, applies orientation, and creates responsive JPEG/WebP copies at a maximum width of 1600 pixels with metadata removed. No originals are published. The gallery includes those 14 photographs and the existing original portrait photograph. Captions and image descriptions are editable in the front matter of `src/about/patch/index.md`; initial wording describes the visible scenes rather than inferring dates or events.
+
+## Organised work galleries
+
+Owner-supplied photographs are now grouped under `assets/source/work/<project>/`, with Patch’s originals under `assets/source/patch/`. Work images retain those project namespaces in their responsive JPEG/WebP output paths. The 13 project content files under `src/pieces/` curate 33 photographs; captions describe the visible work without assuming dates, materials or commission availability. Homepage selections are maintained separately in `src/_data/featuredWork.json`. Originals and the owner’s folder organisation are preserved.

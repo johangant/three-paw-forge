@@ -44,6 +44,12 @@ test('page dependencies include nested layouts, relevant content and prefixed as
   const dependencies = await pageDependencies('src/index.njk', '<img src="/prefix/images/scrollwork-960.jpg"><script src="/prefix/gallery-lightbox.js"></script>', process.cwd(), '/prefix');
   for (const path of ['src/index.njk', 'src/_includes/layouts/base.njk', 'src/_includes/head.njk', 'src/_includes/header.njk', 'src/_includes/footer.njk', 'src/_data/site.json', 'src/pieces', 'src/styles.css', 'public/images/scrollwork-960.jpg', 'public/gallery-lightbox.js']) assert.ok(dependencies.includes(path), path);
   assert.ok(!dependencies.includes('src/_data/faq.json'));
+  assert.ok(dependencies.includes('src/_data/featuredWork.json'));
+  const project = await pageDependencies('src/pieces/spoons.md', '');
+  assert.ok(project.includes('src/pieces/pieces.json'));
+  assert.ok(project.includes('src/_includes/layouts/work-project.njk'));
+  assert.ok(project.includes('src/_includes/footer.njk'));
+  assert.ok(project.includes('scripts/work-gallery.mjs'));
   const faq = await pageDependencies('src/faq/index.njk', '');
   assert.ok(faq.includes('src/_data/faq.json'));
   assert.ok(faq.includes('scripts/faq-markdown.mjs'));

@@ -1,5 +1,6 @@
-import { mkdir, rm, cp, writeFile } from 'node:fs/promises';
+import { mkdir, rm, cp, writeFile, readFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
+import { writeSitemap } from './sitemap.mjs';
 import { annotatePublication } from './publication.mjs';
 import { versionAssetUrls } from './asset-versions.mjs';
 import { normalizeBasePath } from './site-paths.mjs';
@@ -17,6 +18,8 @@ export async function build() {
   execFileSync(process.execPath, ['node_modules/@tailwindcss/cli/dist/index.mjs', '-i', 'src/styles.css', '-o', 'dist/styles.css', '--minify'], { stdio: 'inherit' });
   await annotatePublication();
   await versionAssetUrls('dist', normalizeBasePath(process.env.BASE_PATH));
+  const site = JSON.parse(await readFile('src/_data/site.json', 'utf8'));
+  await writeSitemap('dist', process.env.SITE_URL || site.url);
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) await build();
