@@ -57,7 +57,9 @@ createServer(async (req, res) => {
       res.end('Not found');
     }
   }
-}).listen(port, '127.0.0.1', () => console.log(`${watchMode ? 'Development' : 'Preview'}: http://localhost:${port}`));
+}).listen(port, '127.0.0.1', function () {
+  console.log(`${watchMode ? 'Development' : 'Preview'}: http://127.0.0.1:${this.address().port}`);
+});
 
 if (watchMode) {
   let previousSources = await sourceSnapshot();
