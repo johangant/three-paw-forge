@@ -15,3 +15,5 @@ gallery:
     caption: "A pair of hooks, seen from different angles."
 ---
 Curves, twists and scrolls in forged metal.
+
+I've made a few for around my own home and the workshop itself. Each one is unique.

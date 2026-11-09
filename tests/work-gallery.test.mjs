@@ -61,7 +61,7 @@ test('stories are optional and links resolve to a story with a known parent proj
 });
 
 
-test('WIP photos are drawn only from the reserved directory with captions, order and hiding', () => {
+test('WIP photos are drawn automatically from the reserved directory with captions, order and hiding', () => {
   const assets = { ...manifest,
     'work/wip/one': manifest['work/spoons/one'],
     'work/wip/two': manifest['work/spoons/two'],
@@ -77,6 +77,19 @@ test('WIP photos are drawn only from the reserved directory with captions, order
   assert.equal(photos[1].caption, 'Work in progress.');
   assert.deepEqual(currentWorkPhotos(manifest, content), []);
   assert.equal(currentWorkPhotos({ ...manifest, 'work/wip/two': assets['work/wip/two'] }, content).length, 1);
+});
+
+test('current work can select existing gallery images after WIP photos and rejects missing selections', () => {
+  const assets = { ...manifest, 'work/wip/one': manifest['work/spoons/one'] };
+  const content = { images: {
+    'work/wip/one': { order: 1 },
+    'work/spoons/one': { alt: 'Existing project photo', caption: 'Still in progress', order: 2, fit: 'contain' },
+  } };
+  const photos = currentWorkPhotos(assets, content);
+  assert.deepEqual(photos.map(photo => photo.image), ['work/wip/one', 'work/spoons/one']);
+  assert.equal(photos[1].caption, 'Still in progress');
+  assert.equal(photos[1].fit, 'contain');
+  assert.throws(() => currentWorkPhotos(assets, { images: { 'work/missing/photo': {} } }), /Unknown work image/);
 });
 
 

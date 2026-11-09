@@ -32,6 +32,15 @@ export function renderDates(record) {
   return `First published: ${time(record.firstPublished)} <span aria-hidden="true">·</span> Last updated: ${time(record.lastUpdated)}`;
 }
 
+export function renderPublicationMetadata(record, url) {
+  const data = { '@context': 'https://schema.org', '@type': 'WebPage', url };
+  if (record.firstPublished) data.datePublished = new Date(record.firstPublished).toISOString();
+  if (record.lastUpdated) data.dateModified = new Date(record.lastUpdated).toISOString();
+  // Keep JSON safe inside an HTML script element, including unexpected URL input.
+  const json = JSON.stringify(data).replaceAll('<', '\\u003c');
+  return `<script type="application/ld+json">${json}</script>`;
+}
+
 async function htmlFiles(directory) {
   const result = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
@@ -112,7 +121,11 @@ export async function annotatePublication(directory = 'dist') {
     if (!source.startsWith('src/') || source.split('/').includes('..')) throw new Error('Invalid publication source path.');
     const dependencies = await pageDependencies(source, html, process.cwd(), basePath);
     const dates = gitDates(source, dependencies);
-    await writeFile(path, html.replaceAll(marker[0], renderDates(dates)));
+    const canonical = html.match(/<link rel="canonical" href="([^"]+)"/);
+    if (html.includes('<!--PUBLICATION_JSON_LD-->') && !canonical) throw new Error(`Missing canonical URL in ${path}.`);
+    const url = canonical?.[1].replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#39;', "'").replaceAll('&lt;', '<').replaceAll('&gt;', '>');
+    await writeFile(path, html.replaceAll(marker[0], renderDates(dates))
+      .replaceAll('<!--PUBLICATION_JSON_LD-->', renderPublicationMetadata(dates, url)));
     console.log(`[dates] ${source}: first ${dates.firstPublished ?? 'uncommitted'}, updated ${dates.lastUpdated ?? 'uncommitted'}`);
   }
 }

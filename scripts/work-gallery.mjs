@@ -53,10 +53,10 @@ export function validateStories(projects, stories) {
   return stories;
 }
 
-// The reserved WIP folder feeds the homepage independently of curated work galleries.
+// Include WIP photos automatically and allow existing gallery images to be selected.
 export function currentWorkPhotos(manifest, content) {
-  return Object.keys(manifest)
-    .filter(image => image.startsWith('work/wip/') && !content.images?.[image]?.hidden)
+  return [...new Set([...Object.keys(manifest).filter(image => image.startsWith('work/wip/')), ...Object.keys(content.images ?? {}).filter(image => !image.startsWith('work/wip/'))])]
+    .filter(image => !content.images?.[image]?.hidden)
     .sort((a, b) => ((content.images?.[a]?.order ?? 0) - (content.images?.[b]?.order ?? 0)) || a.localeCompare(b))
     .map(image => workPhoto({
       image,

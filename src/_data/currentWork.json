@@ -4,7 +4,14 @@
     "work/wip/IMG_4315": {
       "alt": "A sun fashioned out of old horse shoes and farrier files",
       "caption": "A sun fashioned out of old horse shoes and farrier files.",
-      "fit": "contain"
+      "fit": "contain",
+      "order": 1
+    },
+    "work/ouroborus/IMG_4042": {
+      "alt": "Forged tree enclosed by a circular serpent, laid on the workshop floor",
+      "caption": "Jörmungandr: forging leaves for the tree before adding the final texture and wooden backing.",
+      "fit": "contain",
+      "order": 2
     }
   }
 }

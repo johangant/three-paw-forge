@@ -13,4 +13,10 @@ gallery:
     alt: "Horse head assembled on a stable door."
     caption: "Horse head assembled on a stable door."
 ---
-A horse head outline made from old horse shoes.
+This piece was a one-off Christmas present for my wife who had recently acquired a horse and made for an interesting decoration on the tack room door.
+
+I had a bucket of rusty old horse shoes, an angle grinder and a cheap electric welder. 
+
+Most of the time was spent cleaning up the horse shoes, then I chopped up and bent them into roughly the profile I wanted before welding them together.
+
+The welder used a flux-core wire which was extremely messy so lots of time needed to clean up the joins. A technical masterpiece it is not, but it was well received and encouraged me to go buy a better MIG welding machine with a gas bottle. 

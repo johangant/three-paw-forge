@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { gitDates, renderDates, pageDependencies } from '../scripts/publication.mjs';
+import { gitDates, renderDates, renderPublicationMetadata, pageDependencies } from '../scripts/publication.mjs';
 
 function git(cwd, args, date = '2026-09-08T12:00:00Z') {
   return execFileSync('git', args, { cwd, encoding: 'utf8', env: {
@@ -58,4 +58,18 @@ test('page dependencies include nested layouts, relevant content and prefixed as
 test('date rendering has machine-readable timestamps and honest uncommitted labels', () => {
   assert.match(renderDates({ firstPublished: '2026-09-08T12:00:00Z', lastUpdated: '2026-11-05T13:00:00Z' }), /datetime="2026-09-08T12:00:00.000Z">8 Sept 2026/);
   assert.match(renderDates({ firstPublished: null, lastUpdated: null }), /not yet committed/);
+});
+
+test('publication JSON-LD preserves canonical URLs, matches footer dates and safely omits unknown dates', () => {
+  const record = { firstPublished: '2026-09-08T12:00:00Z', lastUpdated: '2026-11-05T13:00:00Z' };
+  const url = 'https://example.com/prefix/</script>';
+  const markup = renderPublicationMetadata(record, url);
+  assert.equal(markup.match(/<\/script>/g).length, 1);
+  const data = JSON.parse(markup.replace(/^<script[^>]*>|<\/script>$/g, ''));
+  assert.equal(data['@type'], 'WebPage');
+  assert.equal(data.url, url);
+  for (const date of [data.datePublished, data.dateModified]) assert.ok(renderDates(record).includes(`datetime="${date}"`));
+  const unknown = renderPublicationMetadata({ firstPublished: null, lastUpdated: null }, url);
+  assert.ok(!unknown.includes('datePublished'));
+  assert.ok(!unknown.includes('dateModified'));
 });

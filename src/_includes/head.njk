@@ -9,6 +9,7 @@
 <meta name="theme-color" content="#20221f">
 <title>{{ title }}</title>
 <link rel="canonical" href="{{ page.url | absoluteUrl }}">
+{% if not noindex %}<!--PUBLICATION_JSON_LD-->{% endif %}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{{ site.name }}">
 <meta property="og:title" content="{{ title }}">
