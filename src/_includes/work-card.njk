@@ -2,7 +2,7 @@
 <a href="{{ card.url }}" class="block aspect-[4/3] overflow-hidden bg-coal/5" aria-label="Explore {{ card.title }}">
 <picture class="block h-full w-full">
 <source type="image/webp" srcset="{{ card.image.webpSrcset }}" sizes="(min-width: 1280px) 373px, (min-width: 768px) calc((100vw - 160px) / 3), calc(100vw - 48px)">
-<img src="{{ card.image.src }}" srcset="{{ card.image.srcset }}" sizes="(min-width: 1280px) 373px, (min-width: 768px) calc((100vw - 160px) / 3), calc(100vw - 48px)" width="{{ card.image.width }}" height="{{ card.image.height }}" alt="{{ card.image.alt }}" loading="lazy" decoding="async" class="h-full w-full" style="object-fit: {{ card.image.fit }}; object-position: {{ card.image.focalPoint }};">
+<img src="{{ card.image.src }}" srcset="{{ card.image.srcset }}" sizes="(min-width: 1280px) 373px, (min-width: 768px) calc((100vw - 160px) / 3), calc(100vw - 48px)" width="{{ card.image.width }}" height="{{ card.image.height }}" alt="{{ card.image.alt }}" loading="lazy" decoding="async" class="h-full w-full {{ card.image | imagePresentationClass }}">
 </picture>
 </a>
 {% if page.url == '/work/' %}<h2 class="mt-4 font-serif text-2xl"><a href="{{ card.url }}">{{ card.title }}</a></h2>{% else %}<h3 class="mt-4 font-serif text-2xl"><a href="{{ card.url }}">{{ card.title }}</a></h3>{% endif %}

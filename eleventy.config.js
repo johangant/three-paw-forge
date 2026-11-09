@@ -1,5 +1,5 @@
 import { workRss } from './scripts/rss.mjs';
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { workPhoto, projectCard, selectFeatured, validateStories, currentWorkPhotos, imagePresentation } from './scripts/work-gallery.mjs';
 import { renderFaqAnswer } from './scripts/faq-markdown.mjs';
 import { renderContactMap } from './scripts/contact-map.mjs';
@@ -14,7 +14,20 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData('currentWorkPhotos', currentWorkPhotos(images, currentWork));
   const featured = JSON.parse(readFileSync('src/_data/featuredWork.json', 'utf8'));
   eleventyConfig.addFilter('workRss', async (projects, site) => workRss(projects, images, site));
-  eleventyConfig.addFilter('imagePresentation', imagePresentation);
+  // Keep per-image framing in a same-origin stylesheet so strict CSP can block
+  // inline styles while preserving arbitrary validated focal-point percentages.
+  const framingRules = new Map();
+  eleventyConfig.on('eleventy.before', () => framingRules.clear());
+  eleventyConfig.addFilter('imagePresentationClass', entry => {
+    const { fit, focalPoint } = imagePresentation(entry);
+    const position = focalPoint.replaceAll('%', '').replaceAll('.', '_').replaceAll(' ', '-');
+    const className = `image-${fit}-${position}`;
+    framingRules.set(className, `.${className} { object-fit: ${fit}; object-position: ${focalPoint}; }`);
+    return className;
+  });
+  eleventyConfig.on('eleventy.after', ({ dir }) => {
+    writeFileSync(`${dir.output}/gallery-framing.css`, [...framingRules.values()].sort().join('\n') + '\n');
+  });
   eleventyConfig.addFilter('workPhoto', entry => workPhoto(entry, images));
   eleventyConfig.addFilter('projectCard', project => projectCard(project, images));
   eleventyConfig.addFilter('faqMarkdown', renderFaqAnswer);

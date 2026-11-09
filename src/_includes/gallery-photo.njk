@@ -1,9 +1,8 @@
-{% set framed = photo | imagePresentation %}
 <figure class="min-w-0">
 <a href="{{ photo.src }}" aria-label="View full photograph: {{ photo.alt }}" class="block aspect-[4/3] overflow-hidden bg-coal/5" data-gallery-photo>
 <picture class="block h-full w-full">
 {% if photo.webpSrcset %}<source type="image/webp" srcset="{{ photo.webpSrcset }}" sizes="(min-width: 1280px) 365px, (min-width: 1024px) calc((100vw - 176px) / 3), (min-width: 640px) calc((100vw - 88px) / 2), calc(100vw - 48px)">{% endif %}
-<img src="{{ photo.src }}" srcset="{{ photo.srcset }}" sizes="(min-width: 1280px) 365px, (min-width: 1024px) calc((100vw - 176px) / 3), (min-width: 640px) calc((100vw - 88px) / 2), calc(100vw - 48px)" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt }}" loading="lazy" decoding="async" class="block h-full w-full" style="object-fit: {{ framed.fit }}; object-position: {{ framed.focalPoint }};">
+<img src="{{ photo.src }}" srcset="{{ photo.srcset }}" sizes="(min-width: 1280px) 365px, (min-width: 1024px) calc((100vw - 176px) / 3), (min-width: 640px) calc((100vw - 88px) / 2), calc(100vw - 48px)" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt }}" loading="lazy" decoding="async" class="block h-full w-full {{ photo | imagePresentationClass }}">
 </picture>
 </a>
 <figcaption class="mt-4 text-sm leading-relaxed">{{ photo.caption }}</figcaption>
